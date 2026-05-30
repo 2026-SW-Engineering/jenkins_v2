@@ -1,1 +1,16 @@
 .env
+
+*.class
+/classes/
+
+/lib/
+/test-reports/
+
+.DS_Store
+
+.vscode/
+
+.metadata
+.settings/
+.classpath
+.project
