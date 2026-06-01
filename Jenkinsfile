@@ -67,7 +67,13 @@ pipeline {
                 from: 'syp0463@gmail.com',
                 to: 'taegun0122@naver.com, leejs804111@naver.com, syp0463@gmail.com, choiwoosik2001@gmail.com',
                 subject: "[Jenkins] 빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: "성공.\n\n빌드 URL: ${env.BUILD_URL}\n\n 테스트 결과 test-output.txt 파일 확인",
+                body: """
+                빌드 성공
+
+                Job: ${env.JOB_NAME}
+                Build Number: ${env.BUILD_NUMBER}
+                테스트 결과 test-output.txt 파일 확인
+                """,
                 attachmentsPattern: "${REPORT_DIR}/test-output.txt"
             )
         }
@@ -78,7 +84,13 @@ pipeline {
                 from: 'syp0463@gmail.com',
                 to: 'taegun0122@naver.com, leejs804111@naver.com, syp0463@gmail.com, choiwoosik2001@gmail.com',
                 subject: "[Jenkins] 빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: "실패.\n\n빌드 URL: ${env.BUILD_URL}",
+                body: """
+                빌드 실패
+
+                Job: ${env.JOB_NAME}
+                Build Number: ${env.BUILD_NUMBER}
+                테스트 결과 test-output.txt 파일 확인
+                """,
                 attachmentsPattern: "${REPORT_DIR}/test-output.txt"
             )
         }
