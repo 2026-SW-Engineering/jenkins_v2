@@ -51,5 +51,9 @@ class StudentManagerTest {
         });
     }
     
-
+    @Test
+    @Order(5)
+    void testGetStudentCount() {
+        assertEquals(1, manager.getStudentCount());
+    }
 }
