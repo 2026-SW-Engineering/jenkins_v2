@@ -54,7 +54,7 @@ pipeline {
             }
         }
     }
-     post {
+    post {
         always {
             echo "[*] Archiving test results..."
             junit "${REPORT_DIR}/**/*.xml"
@@ -63,16 +63,22 @@ pipeline {
 
         success {
             echo "Build and test succeeded"
-            mail to: 'taegun0122@naver.com, leejs804111@naver.com, syp0463@gmail.com, choiwoosik2001@gmail.com',
-                 subject: "[Jenkins] 빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "성공.\n\n빌드 URL: ${env.BUILD_URL}"
+            emailext (
+                to: 'taegun0122@naver.com, leejs804111@naver.com, syp0463@gmail.com, choiwoosik2001@gmail.com',
+                subject: "[Jenkins] 빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "성공.\n\n빌드 URL: ${env.BUILD_URL}\n\n 테스트 결과 test-output.txt 파일 확인",
+                attachmentsPattern: "${REPORT_DIR}/test-output.txt"
+            )
         }
 
         failure {
             echo "Build or test failed"
-            mail to: 'taegun0122@naver.com, leejs804111@naver.com, syp0463@gmail.com, choiwoosik2001@gmail.com',
-                 subject: "[Jenkins] 빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "실패.\n\n빌드 URL: ${env.BUILD_URL}"
+            emailext (
+                to: 'taegun0122@naver.com, leejs804111@naver.com, syp0463@gmail.com, choiwoosik2001@gmail.com',
+                subject: "[Jenkins] 빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "실패.\n\n빌드 URL: ${env.BUILD_URL}",
+                attachmentsPattern: "${REPORT_DIR}/test-output.txt"
+            )
         }
     }
 }
