@@ -37,7 +37,7 @@ class StudentManagerTest {
     @Test
     @Order(3)
     void testDuplicateAddStudentThrowsException() {
-
+        manager.addStudent("Alice");
         assertThrows(IllegalArgumentException.class, () -> {
             manager.addStudent("Alice");
         });
@@ -51,5 +51,9 @@ class StudentManagerTest {
         });
     }
     
-
+    @Test
+    @Order(5)
+    void testGetStudentCount() {
+        assertEquals(1, manager.getStudentCount());
+    }
 }

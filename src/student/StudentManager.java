@@ -25,4 +25,11 @@ public class StudentManager {
     public boolean hasStudent(String name) {
         return students.contains(name);
     }
+     // 추가
+    public int getStudentCount() {
+        return students.size();
+    }
+    // 주석 추가
+
+
 }
